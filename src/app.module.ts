@@ -18,6 +18,6 @@ import { FileModule } from './file/file.module';
 
   ],
   controllers: [AppController],
-  providers: [AppService ],
+  providers: [AppService],
 })
 export class AppModule {}

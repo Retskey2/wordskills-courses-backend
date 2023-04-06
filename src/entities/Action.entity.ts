@@ -1,5 +1,4 @@
 import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
-
 @Index("action_pk", ["id"], { unique: true })
 @Entity("action", { schema: "public" })
 export class Action {
