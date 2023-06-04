@@ -13,11 +13,11 @@ async function bootstrap() {
 
     const document = SwaggerModule.createDocument(app, new DocumentBuilder()
       .setTitle('Item API')
-      .setDescription('My Item API')
+      .setDescription('The api docs for the web-application')
+      .addBearerAuth({ in: 'header', type: 'http' })
       .build());
 
     SwaggerModule.setup('docs', app, document);
-
   }
   
   await app.listen(4001);

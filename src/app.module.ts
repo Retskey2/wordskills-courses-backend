@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { CourseModule } from './course/course.module';
 import { FileModule } from './file/file.module';
+import { PostsModule } from './posts/posts.module';
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { FileModule } from './file/file.module';
     AuthModule,
     CourseModule,
     FileModule,
-
+    PostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

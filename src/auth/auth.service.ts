@@ -98,7 +98,7 @@ export class AuthService {
 
             const user = await this.userRepository.findOneBy({id: result.id})
 
-            const tokens = await  this.issueTokenPair(user.id)
+            const tokens = await this.issueTokenPair(user.id)
 
             return {
                 user: this.returnUserFields(user),
@@ -110,6 +110,7 @@ export class AuthService {
             return {
                 id: user.id,
                 email: user.email,
+                isAdmin: user.isAdmin
             }
         }
 }
