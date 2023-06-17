@@ -5,13 +5,13 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from "@nestjs/common";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.setGlobalPrefix('/api')
 
   app.enableCors({
     allowedHeaders: ['content-type'],
-    origin: 'https://wordskills-courses-frontend.vercel.app',
+    origin: process.env.CORS,
     credentials: true,
   });
   
@@ -23,12 +23,11 @@ async function bootstrap() {
       .setDescription('The api docs for the web-application')
       .addBearerAuth({ in: 'header', type: 'http' })
       .build());
-      
 
     SwaggerModule.setup('docs', app, document);
   }
-  
-  await app.listen(4001);
+
+  await app.listen(4001)
 
 }
 bootstrap();
