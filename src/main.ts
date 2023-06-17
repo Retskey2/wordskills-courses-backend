@@ -10,14 +10,15 @@ async function bootstrap() {
   app.setGlobalPrefix('/api')
 
   app.enableCors({
-    methods: ['GET', 'POST', 'DELETE'],
-    origin: process.env.CORS,
-    credentials: true,
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+    credentials: true
   });
   
 
   if (!configService.isProduction()) {
-    
     const document = SwaggerModule.createDocument(app, new DocumentBuilder()
       .setTitle('Item API')
       .setDescription('The api docs for the web-application')
