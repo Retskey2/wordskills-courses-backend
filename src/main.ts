@@ -16,6 +16,7 @@ async function bootstrap() {
       .setDescription('The api docs for the web-application')
       .addBearerAuth({ in: 'header', type: 'http' })
       .build());
+      
 
     SwaggerModule.setup('docs', app, document);
   }
