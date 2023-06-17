@@ -5,12 +5,20 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from "@nestjs/common";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.setGlobalPrefix('/api')
-  
-  if (!configService.isProduction()) {
 
+  app.enableCors({
+    allowedHeaders: ['content-type'],
+    origin: 'http://localhost:3000',
+    credentials: true,
+  });
+  
+
+  if (!configService.isProduction()) {
+   
+    
     const document = SwaggerModule.createDocument(app, new DocumentBuilder()
       .setTitle('Item API')
       .setDescription('The api docs for the web-application')
