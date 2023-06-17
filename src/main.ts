@@ -11,7 +11,7 @@ async function bootstrap() {
 
   app.enableCors({
     allowedHeaders: ['content-type'],
-    origin: process.env.CORS,
+    origin: 'https://wordskills-courses-frontend.vercel.app',
     credentials: true,
   });
   
