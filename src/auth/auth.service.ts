@@ -77,8 +77,8 @@ export class AuthService {
         async validateUser(dto: LoginAuthDto): Promise<User> {
             const user = await this.userRepository.findOne({
                 where: [
-                    {login: dto.login},
-                    {email: dto.login}
+                    {email: dto.email},
+             
                 ]
             })
             if(!user) throw new UnauthorizedException('User not found')
@@ -109,6 +109,7 @@ export class AuthService {
         returnUserFields(user: User) {
             return {
                 id: user.id,
+                login: user.login,
                 email: user.email,
                 isAdmin: user.isAdmin
             }

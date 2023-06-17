@@ -21,7 +21,6 @@ export class UserController {
         return await this.userService.getAll();
     }
   
-
     @ApiOperation({ summary: 'Get current auth user' })
     @ApiResponse({ status: 200, description: 'The current has been successfully retrieved'})
     @HttpCode(200)

@@ -1,14 +1,15 @@
 import { ApiProperty } from "@nestjs/swagger"
-import { IsString, MinLength } from "class-validator"
+import { IsEmail, IsString, MinLength } from "class-validator"
 
 
 export class LoginAuthDto {
     @ApiProperty()
     @IsString()
+    @IsEmail()
     @MinLength(6, {
         message: 'input cannot than 6 characters!'
     })
-    login: string
+    email: string
 
     @ApiProperty()
     @IsString()
