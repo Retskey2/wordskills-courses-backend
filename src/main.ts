@@ -11,13 +11,12 @@ async function bootstrap() {
 
   app.enableCors({
     allowedHeaders: ['content-type'],
-    origin: 'http://localhost:3000',
+    origin: process.env.CORS,
     credentials: true,
   });
   
 
   if (!configService.isProduction()) {
-   
     
     const document = SwaggerModule.createDocument(app, new DocumentBuilder()
       .setTitle('Item API')
