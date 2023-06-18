@@ -10,11 +10,13 @@ async function bootstrap() {
   app.setGlobalPrefix('/api')
 
   app.enableCors({
-    origin: true,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    allowedHeaders: 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Observe',
+    origin: [
+      'http://localhost:3000',
+      'https://wordskills-courses-frontend.vercel.app/',,
+    ],
+    methods: ["GET", "POST"],
     credentials: true,
-})
+  });
   
   if (!configService.isProduction()) {
     const document = SwaggerModule.createDocument(app, new DocumentBuilder()
