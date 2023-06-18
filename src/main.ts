@@ -10,12 +10,10 @@ async function bootstrap() {
   app.setGlobalPrefix('/api')
 
   app.enableCors({
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-    credentials: true
-  });
+    origin: '*',
+    methods: 'GET, PUT, POST, DELETE',
+    allowedHeaders: 'Content-Type, Authorization',
+})
   
 
   if (!configService.isProduction()) {
