@@ -14,7 +14,7 @@ async function bootstrap() {
       'http://localhost:3000',
       'https://wordskills-courses-frontend.vercel.app',
     ],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     credentials: true,
   });
   
