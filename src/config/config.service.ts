@@ -48,7 +48,9 @@ class ConfigService {
       synchronize: true,
 
 
-      entities: ["src/**/*.entity.ts"],
+      entities: [
+        __dirname + "/entity/*.ts"
+    ],
 
       migrationsTableName: 'migration',
 
