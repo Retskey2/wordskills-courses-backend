@@ -12,7 +12,7 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:3000',
-      'https://wordskills-courses-frontend.vercel.app/',,
+      'https://wordskills-courses-frontend.vercel.app',,
     ],
     methods: ["GET", "POST"],
     credentials: true,
