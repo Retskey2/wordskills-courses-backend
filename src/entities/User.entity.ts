@@ -2,6 +2,8 @@ import {
   Column,
   Entity,
   Index,
+  JoinTable,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -12,6 +14,7 @@ import { Teacher } from "./Teacher.entity";
 import { UserHasCourse } from "./UserHasCourse.entity";
 import { UserProfile } from "./UserProfile.entity";
 import { ApiExtraModels, ApiProperty } from '@nestjs/swagger';
+import { ArrayNotEmpty } from "class-validator";
 
 @Index("user_id_idx", ["id"], {})
 @Index("user_pk", ["id"], { unique: true })
@@ -65,4 +68,23 @@ export class User {
   @ApiProperty({ type: () => [UserProfile] })
   @OneToMany(() => UserProfile, (userProfile) => userProfile.user)
   userProfiles: UserProfile[];
+
+  @ApiProperty({type: () => [Course]})
+  @ManyToMany(
+    () => Course, 
+    course => course.users, //optional,
+    {onDelete: 'NO ACTION', onUpdate: 'NO ACTION'}
+  )
+  @JoinTable({
+    name: "user_has_course",
+        joinColumn: {
+          name: 'user_id',
+          referencedColumnName: 'id',
+        },
+        inverseJoinColumn: {
+          name: 'course_id',
+          referencedColumnName: 'id',
+        },
+  })
+  subscriptions?: Course[];
 }

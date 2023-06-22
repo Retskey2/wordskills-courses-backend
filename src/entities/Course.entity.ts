@@ -3,6 +3,7 @@ import {
   Entity,
   Index,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -13,6 +14,7 @@ import { CourseHasAreasTraining } from "./CourseHasAreasTraining.entity";
 import { CourseHasTeacher } from "./CourseHasTeacher.entity";
 import { CoursePrerequisites } from "./CoursePrerequisites.entity";
 import { UserHasCourse } from "./UserHasCourse.entity";
+import { ArrayNotEmpty } from "class-validator";
 
 @Index("course_pk", ["id"], { unique: true })
 @Index("course_id_idx", ["id"], {})
@@ -102,4 +104,10 @@ export class Course {
 
   @OneToMany(() => UserHasCourse, (userHasCourse) => userHasCourse.course)
   userHasCourses: UserHasCourse[];
+
+  @ManyToMany(() => User, 
+  user => user.subscriptions,
+  {onDelete: 'NO ACTION', onUpdate: 'NO ACTION',}
+  )
+  users?: User[];
 }

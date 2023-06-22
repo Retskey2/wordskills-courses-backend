@@ -5,7 +5,7 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagg
 import { Auth } from '../auth/decorators/auth.decorator';
 import { User } from './decorators/user.decorator';
 import { UpdateUserDto } from './dto/user-update.dto';
-
+import { User as UserModel } from '../entities/User.entity';
 
 @ApiTags('users')
 @Controller('users')
@@ -55,6 +55,7 @@ export class UserController {
     ) {
       return this.userService.updateProfile(id, dto)
     }
+    
 
     @ApiOperation({ summary: 'Delete current auth user' })
     @ApiResponse({ status: 200, description: 'The current has been successfully deleted'})
@@ -66,5 +67,26 @@ export class UserController {
       @Param('id') id: number,
     ) {
       return this.userService.delete(id)
+    }
+
+
+    @Get('profile/subscription')
+    @Auth()
+    @ApiBearerAuth()
+    async getFavorites(
+      @User('id') id: number,
+    ) {
+      return this.userService.getSubscription(id)
+    }
+
+    @Put('profile/subscription/:id')
+    @HttpCode(200)
+    @Auth()
+    @ApiBearerAuth()
+    async ToggleSubscription(
+      @User() user: UserModel,
+      @Param('id') id: number
+    ) {
+      return this.userService.subscription(id, user)
     }
 }
