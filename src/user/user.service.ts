@@ -4,14 +4,12 @@ import { User } from '../entities/User.entity';
 import { Repository } from 'typeorm';
 import { genSalt, hash } from 'bcryptjs';
 import { UpdateUserDto } from './dto/user-update.dto';
-import { Course } from '../entities/Course.entity';
 import { UserHasCourse } from '../entities/UserHasCourse.entity';
 
 @Injectable()
 export class UserService {
     constructor(
       @InjectRepository(User) private readonly userModel: Repository<User>,
-      @InjectRepository(Course) private readonly courseModel: Repository<Course>,
       @InjectRepository(UserHasCourse) private readonly userHasCourseModel: Repository<UserHasCourse>
     ){}
 

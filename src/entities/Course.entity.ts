@@ -44,6 +44,9 @@ export class Course {
   @Column("boolean", { name: "is_online", default: () => "false" })
   isOnline: boolean;
 
+  @Column("integer", { name: "countOpened", default:() => "0"})
+  countOpened: number;
+
   @Column("character varying", { name: "img_src", nullable: true })
   imgSrc: string | null;
 

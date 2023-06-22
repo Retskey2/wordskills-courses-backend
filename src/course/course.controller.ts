@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, Param, Query } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Put, Query } from '@nestjs/common';
 
 import { CourseService } from './course.service';
 import { PageDto } from '../page/page.dto';
@@ -21,6 +21,12 @@ export class CourseController {
         return await this.courseService.getAll(pageOptionsDto);
     }
 
+    @Get('most-popular')
+    @HttpCode(200)
+    async getMostPopular() {
+        return this.courseService.getMostPopular()
+    }
+
     @ApiOperation({ summary: 'Get count of courses' })
     @ApiResponse({ status: 200, description: 'The count of courses has been successfully retrieved.' })
     @HttpCode(200)
@@ -37,4 +43,18 @@ export class CourseController {
         return await this.courseService.getById(id)
     }
 
+    @ApiOperation({ summary: 'Get a course subscriptions by ID' })
+    @ApiResponse({ status: 200, description: 'The course subscriptions by id has been successfully retrieved.' })
+    @HttpCode(200)
+    @Get('/subscriptions/:id')
+    public async getSubscriptions(@Param('id') id: number) {
+        return await this.courseService.getSubscriptions(id)
+    }
+
+
+    @Put('update-count-opened/:id')
+    @HttpCode(200)
+    async updateCountOpened(@Param('id') id: number) {
+        return this.courseService.updateCountOpened(id)
+    }
 }
