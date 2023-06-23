@@ -1,4 +1,4 @@
-import { Controller, Get, HttpCode, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, HttpCode, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { News } from '../entities/News.entity';
@@ -15,6 +15,12 @@ export class PostsController {
     @Get()
     public async getAll(): Promise<News[]> {
         return await this.postsService.getAll();
+    }
+
+    @Get('most-popular')
+    @HttpCode(200)
+    async getMostPopular() {
+        return this.postsService.getMostPopular()
     }
     
     @ApiOperation({ summary: 'Create new post' })
@@ -41,5 +47,11 @@ export class PostsController {
     @Get(':id')
     public async getById(@Param('id') id: number) {
         return await this.postsService.getById(id)
+    }
+
+    @Put('update-count-opened/:id')
+    @HttpCode(200)
+    async updateCountOpened(@Param('id') id: number) {
+        return this.postsService.updateCountOpened(id)
     }
 }

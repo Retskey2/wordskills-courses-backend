@@ -21,6 +21,13 @@ export class UserController {
         return await this.userService.getAll();
     }
   
+    @Get('count')
+    async getCount(
+    ) {
+      return this.userService.getCount()
+    }
+
+
     @ApiOperation({ summary: 'Get current auth user' })
     @ApiResponse({ status: 200, description: 'The current has been successfully retrieved'})
     @HttpCode(200)
@@ -79,6 +86,7 @@ export class UserController {
       return this.userService.getSubscription(id)
     }
 
+  
     @Put('profile/subscription/:id')
     @HttpCode(200)
     @Auth()

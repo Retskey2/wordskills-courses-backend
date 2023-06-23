@@ -25,6 +25,11 @@ export class UserService {
       return await this.userModel.find()
     }
 
+    public async getCount() {
+      return await this.userModel.count();
+  }
+
+
     async updateProfile(id: number, dto: UpdateUserDto) {
         const user = await this.byId(id)
         const isSameUser = await this.userModel.findOne({ where: {

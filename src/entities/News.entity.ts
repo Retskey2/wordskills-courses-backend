@@ -34,6 +34,9 @@ export class News {
   @ApiProperty()
   @Column("date", { name: "created_at", nullable: true })
   createdAt: string | null;
+  
+  @Column("integer", { name: "countOpened", default:() => "0"})
+  countOpened: number;
 
   @ApiProperty()
   @PrimaryGeneratedColumn({ type: "integer", name: "id" })
